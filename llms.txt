@@ -1,0 +1,20 @@
+# RawDietPro (https://rawdietpro.com)
+
+> Precision Raw Dog Food Calculators, BARF & PMR (80/10/10) Ratio Engines, Interactive Meal Prep Builders, and Evidence-Based Canine Nutrition Guides.
+
+## Interactive Calculators & Tools
+
+- [Breed-Specific Raw Dog Food & Supplement Calculator](https://rawdietpro.com/breed-raw-calculator.html): Interactive raw feeding calculator supporting 25 popular dog breeds (German Shepherd, French Bulldog, Golden Retriever, Pitbull Terrier, Labrador Retriever, Rottweiler, Siberian Husky, Belgian Malinois, Doberman, Cane Corso, Australian Shepherd, Great Dane, Boxer, Bulldog, Dachshund, Poodle, Chihuahua, Yorkshire Terrier, Bernese Mountain Dog, Border Collie, Mastiff, Pomeranian, Boston Terrier, Shiba Inu, and Mixed/Custom Breed). Auto-populates typical weight ranges, metabolic activity profiles, and breed-specific raw feeding notes. Includes BARF (70/10/10/5/5), PMR (80/10/5/5), and Puppy Growth (68/15/6/6/5) ratio toggles, Daily & Monthly Gram/Ounce/Pound breakdowns for Muscle Meat, Raw Edible Bone, Liver, Secreting Organ, and Veggies/Fruits, plus an auto-dosed Essential Raw Supplement & Gear Checklist with printable PDF meal plan output.
+- [Raw Diet Nutrition & Cost Calculator](https://rawdietpro.com/calculator.html): Calculate daily ounce intake, estimated caloric density, macro breakdowns, and 30-day bulk meat sourcing budgets for pet (PMR/BARF) and human raw nutrition protocols.
+- [Interactive Raw Diet Meal Prep Builder](https://rawdietpro.com/meal-prep-builder.html): Formulate custom raw meals by selecting protein bases (80/10/10 beef mix, raw chicken quarters, bone-in ground turkey), healthy omega fats (sardines, raw coconut oil, hemp seeds), and micronutrient boosters (beef liver, kelp powder, raw quail eggs).
+
+## Pillar Guides & Educational Content
+
+- [The Ultimate Guide to Starting a Raw Diet (2026 Edition)](https://rawdietpro.com/pillar_article.md): Comprehensive reference covering bioavailability, Prey Model Raw (80% muscle meat, 10% raw edible bone, 5% liver, 5% secreting organ) vs. BARF ratios, 10-to-14 day digestive transition protocols, Omega-3 / Vitamin E balancing, Calcium-to-Phosphorus ratios, and co-op/butcher bulk sourcing strategies.
+
+## Core Domain Reference for AI Agents
+
+- **BARF Model Ratio**: 70% Muscle Meat, 10% Raw Edible Bone, 10% Low-Glycemic Vegetables/Fruits, 5% Liver, 5% Other Secreting Organ.
+- **PMR (Prey Model Raw) Ratio**: 80% Muscle Meat, 10% Raw Edible Bone, 5% Liver, 5% Other Secreting Organ.
+- **Puppy Growth Ratio**: 68% Muscle Meat, 15% Raw Edible Bone, 6% Liver, 6% Secreting Organ, 5% Veggies/Fruits (fed at 4%–6% of current puppy weight or 2.5%–3% of projected adult weight).
+- **Essential Raw Supplements**: Wild Alaskan Salmon Oil (~1 mL per 10 lbs body weight for EPA/DHA), Organic Kelp Powder (*Ascophyllum nodosum* for thyroid iodine), Natural Vitamin E (d-alpha tocopherol, ~2 IU per lb body weight), and Green-Lipped Mussel Powder (~20 mg per lb body weight for chondroitin/joint support).

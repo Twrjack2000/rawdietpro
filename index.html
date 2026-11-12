@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breed-Specific Raw Dog Food & Supplement Calculator | RawDietPro</title>
+    <meta name="description"
+        content="Calculate exact daily and monthly BARF, PMR (80/10/10), and Puppy Growth raw dog food ratios in grams, ounces, and pounds for 25 popular dog breeds, complete with supplement dosages and printable grocery checklist.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-light: rgba(16, 185, 129, 0.12);
+            --accent: #f43f5e;
+            --accent-dark: #e11d48;
+            --secondary: #0f172a;
+            --secondary-light: #1e293b;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 1.5rem 2rem 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Top Navigation Bar */
+        .top-nav {
+            width: 100%;
+            max-width: 1200px;
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 0.85rem 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .brand-logo {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            padding: 0.5rem 0.95rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary);
+            background: #f1f5f9;
+        }
+
+        .nav-link.active {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            max-width: 850px;
+            margin-bottom: 2rem;
+        }
+
+        .page-header .eyebrow {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            font-weight: 700;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.35rem 0.85rem;
+            border-radius: 99px;
+            margin-bottom: 0.75rem;
+        }
+
+        .page-header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--secondary);
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 0.65rem;
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Main Calculator Grid */
+        .main-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .calculator-container {
+            background-color: var(--card-bg);
+            width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+        }
+
+        @media (min-width: 960px) {
+            .calculator-container {
+                flex-direction: row;
+            }
+        }
+
+        .input-section {
+            padding: 2.25rem;
+            flex: 1.05;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        @media (min-width: 960px) {
+            .input-section {
+                border-bottom: none;
+                border-right: 1px solid var(--border-color);
+            }
+        }
+
+        .result-section {
+            padding: 2.25rem;
+            flex: 1.25;
+            background: linear-gradient(135deg, var(--secondary) 0%, #1e293b 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.65rem;
+            font-weight: 800;
+            margin-bottom: 1.25rem;
+            color: var(--secondary);
+            letter-spacing: -0.02em;
+        }
+
+        .result-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .breed-badge {
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.35);
+            padding: 0.3rem 0.75rem;
+            border-radius: 99px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group {
+            margin-bottom: 1.35rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 560px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.45rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        label span.hint {
+            font-weight: 600;
+            color: var(--primary-dark);
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 0.75rem 0.95rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 0.98rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            color: var(--text-main);
+            transition: all 0.25s ease;
+            background-color: #f8fafc;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+            background-color: white;
+        }
+
+        /* Breed Info Callout Box */
+        .breed-profile-card {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-left: 4px solid var(--primary);
+            border-radius: 12px;
+            padding: 1rem 1.15rem;
+            margin-bottom: 1.35rem;
+        }
+
+        .breed-profile-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.45rem;
+        }
+
+        .breed-profile-header strong {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            color: #065f46;
+        }
+
+        .breed-meta-tags {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.2rem 0.55rem;
+            border-radius: 6px;
+            background: #dcfce7;
+            color: #047857;
+        }
+
+        .breed-note-text {
+            font-size: 0.875rem;
+            color: #166534;
+            line-height: 1.5;
+        }
+
+        /* Ratio Model Toggles */
+        .ratio-toggle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6rem;
+        }
+
+        @media (max-width: 520px) {
+            .ratio-toggle-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .ratio-btn {
+            background: #f8fafc;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.7rem 0.6rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.15rem;
+        }
+
+        .ratio-btn:hover {
+            border-color: #cbd5e1;
+            background: #f1f5f9;
+        }
+
+        .ratio-btn.active {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            color: var(--primary-dark);
+        }
+
+        .ratio-btn .ratio-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--secondary);
+        }
+
+        .ratio-btn.active .ratio-title {
+            color: var(--primary-dark);
+        }
+
+        .ratio-btn .ratio-sub {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .slider-val {
+            font-weight: 700;
+            color: var(--primary-dark);
+            min-width: 54px;
+            text-align: right;
+            font-size: 0.95rem;
+        }
+
+        /* Results Section Top Stats */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 1.15rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .stat-card.primary-stat {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border: none;
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #cbd5e1;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .primary-stat .stat-label {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .stat-value {
+            font-size: 1.55rem;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .stat-sub {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 0.2rem;
+        }
+
+        /* Visual Ratio Bar */
+        .macro-bar-wrap {
+            margin-bottom: 1.5rem;
+        }
+
+        .macro-bar {
+            display: flex;
+            height: 14px;
+            border-radius: 7px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .macro-segment {
+            height: 100%;
+            transition: width 0.35s ease;
+        }
+
+        .seg-muscle {
+            background-color: #ef4444;
+        }
+
+        .seg-bone {
+            background-color: #f8fafc;
+        }
+
+        .seg-liver {
+            background-color: #a855f7;
+        }
+
+        .seg-organ {
+            background-color: #f59e0b;
+        }
+
+        .seg-veggie {
+            background-color: #10b981;
+        }
+
+        .macro-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem 1.25rem;
+            margin-top: 0.65rem;
+            font-size: 0.76rem;
+            color: #cbd5e1;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .legend-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* Breakdown Table (Daily & Monthly in Grams, Ounces, Pounds) */
+        .breakdown-table-wrapper {
+            background: rgba(15, 23, 42, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            overflow-x: auto;
+            margin-bottom: 1.25rem;
+        }
+
+        table.breakdown-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.85rem;
+        }
+
+        table.breakdown-table th {
+            background: rgba(255, 255, 255, 0.06);
+            color: #94a3b8;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.75rem 0.85rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        table.breakdown-table td {
+            padding: 0.75rem 0.85rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            color: #f1f5f9;
+            white-space: nowrap;
+        }
+
+        table.breakdown-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        table.breakdown-table tr.total-row td {
+            background: rgba(16, 185, 129, 0.15);
+            font-weight: 700;
+            color: #ffffff;
+            border-top: 1px solid rgba(16, 185, 129, 0.4);
+        }
+
+        .cat-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 600;
+        }
+
+        .pct-badge {
+            font-size: 0.7rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.12);
+            color: #cbd5e1;
+        }
+
+        /* Supplement & Gear Checklist Section */
+        .checklist-section {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            padding: 2.25rem;
+        }
+
+        .checklist-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 1rem;
+        }
+
+        .checklist-header h2 {
+            margin-bottom: 0.25rem;
+        }
+
+        .checklist-header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.15rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .check-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.9rem;
+            padding: 1.15rem;
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            background: #f8fafc;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .check-card:hover {
+            border-color: #cbd5e1;
+            background: #ffffff;
+        }
+
+        .check-card.checked {
+            border-color: var(--primary);
+            background: #f0fdf4;
+        }
+
+        .check-card input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 0.15rem;
+            accent-color: var(--primary);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .check-content {
+            flex: 1;
+        }
+
+        .check-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .check-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--secondary);
+        }
+
+        .dosage-pill {
+            font-size: 0.74rem;
+            font-weight: 700;
+            background: var(--secondary);
+            color: #34d399;
+            padding: 0.2rem 0.55rem;
+            border-radius: 99px;
+            white-space: nowrap;
+        }
+
+        .check-desc {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+            margin-bottom: 0.75rem;
+        }
+
+        .amz-buy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #ff9900;
+            color: #0f172a;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 0.82rem;
+            text-decoration: none;
+            padding: 0.48rem 0.9rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+
+        .amz-buy-btn:hover {
+            background: #f59e0b;
+            transform: translateY(-1px);
+        }
+
+        .lead-capture-box {
+            margin-top: 1.5rem;
+            background: #f0fdf4;
+            border: 2px solid #86efac;
+            border-radius: 14px;
+            padding: 1.65rem 1.85rem;
+        }
+
+        .lead-capture-box h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #065f46;
+            margin-bottom: 0.3rem;
+        }
+
+        .lead-capture-box p {
+            font-size: 0.92rem;
+            color: #166534;
+            margin-bottom: 1.1rem;
+        }
+
+        .lead-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr auto;
+            gap: 0.85rem;
+            align-items: center;
+        }
+
+        @media (max-width: 760px) {
+            .lead-form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .lead-form-row input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #bbf7d0;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: var(--text-main);
+        }
+
+        .lead-form-row input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-lead-submit {
+            background: var(--secondary);
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            padding: 0.85rem 1.4rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .btn-lead-submit:hover {
+            background: var(--primary-dark);
+        }
+
+        .lead-status {
+            margin-top: 0.65rem;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #047857;
+            display: none;
+        }
+
+        .cta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 1.5rem 1.75rem;
+            border-radius: 14px;
+            color: white;
+        }
+
+        .cta-text h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .cta-text p {
+            font-size: 0.875rem;
+            color: #94a3b8;
+        }
+
+        .btn-print {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 0.95rem 1.6rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-print:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        /* Print Stylesheet */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                color: black;
+            }
+
+            .top-nav,
+            .btn-print {
+                display: none !important;
+            }
+
+            .calculator-container,
+            .checklist-section {
+                box-shadow: none;
+                border: 1px solid #cbd5e1;
+                page-break-inside: avoid;
+            }
+
+            .result-section {
+                background: white !important;
+                color: black !important;
+            }
+
+            .result-section h2,
+            .stat-value,
+            table.breakdown-table td,
+            table.breakdown-table th {
+                color: black !important;
+            }
+
+            .stat-card,
+            .stat-card.primary-stat,
+            .breakdown-table-wrapper {
+                background: #f8fafc !important;
+                border: 1px solid #cbd5e1 !important;
+                color: black !important;
+            }
+
+            .stat-label,
+            .stat-sub {
+                color: #334155 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Seamless Navigation Across All 3 RawDietPro Tools -->
+    <nav class="top-nav">
+        <a href="calculator.html" class="brand-logo">RawDiet<span>Pro</span></a>
+        <div class="nav-links">
+            <a href="calculator.html" class="nav-link">Nutrition & Cost Calculator</a>
+            <a href="breed-raw-calculator.html" class="nav-link active">Breed-Specific Calculator</a>
+            <a href="meal-prep-builder.html" class="nav-link">Meal Prep Builder</a>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <span class="eyebrow">Veterinary-Grade Raw Ratio Engine</span>
+        <h1>Breed-Specific Raw Dog Food & Supplement Calculator</h1>
+        <p>Select from 25 popular dog breeds to auto-configure metabolic activity profiles, BARF vs. PMR (80/10/10) vs.
+            Puppy Growth ratios, and daily/monthly gram, ounce, and pound portions.</p>
+    </header>
+
+    <main class="main-wrapper">
+        <div class="calculator-container">
+            <!-- Left Column: Inputs & Breed Selector -->
+            <div class="input-section">
+                <h2>1. Select Breed & Life Stage</h2>
+
+                <div class="form-group">
+                    <label for="breedSelect">
+                        Dog Breed (25 Profiles)
+                        <span class="hint" id="breedWeightHint">Typical: 65–90 lbs</span>
+                    </label>
+                    <select id="breedSelect">
+                        <option value="German Shepherd">German Shepherd</option>
+                        <option value="French Bulldog">French Bulldog</option>
+                        <option value="Golden Retriever">Golden Retriever</option>
+                        <option value="Pitbull Terrier">Pitbull Terrier</option>
+                        <option value="Labrador Retriever">Labrador Retriever</option>
+                        <option value="Rottweiler">Rottweiler</option>
+                        <option value="Siberian Husky">Siberian Husky</option>
+                        <option value="Belgian Malinois">Belgian Malinois</option>
+                        <option value="Doberman">Doberman</option>
+                        <option value="Cane Corso">Cane Corso</option>
+                        <option value="Australian Shepherd">Australian Shepherd</option>
+                        <option value="Great Dane">Great Dane</option>
+                        <option value="Boxer">Boxer</option>
+                        <option value="Bulldog">Bulldog</option>
+                        <option value="Dachshund">Dachshund</option>
+                        <option value="Poodle">Poodle</option>
+                        <option value="Chihuahua">Chihuahua</option>
+                        <option value="Yorkshire Terrier">Yorkshire Terrier</option>
+                        <option value="Bernese Mountain Dog">Bernese Mountain Dog</option>
+                        <option value="Border Collie">Border Collie</option>
+                        <option value="Mastiff">Mastiff</option>
+                        <option value="Pomeranian">Pomeranian</option>
+                        <option value="Boston Terrier">Boston Terrier</option>
+                        <option value="Shiba Inu">Shiba Inu</option>
+                        <option value="Mixed/Custom Breed">Mixed/Custom Breed</option>
+                    </select>
+                </div>
+
+                <!-- Dynamic Breed-Specific Raw Feeding Note -->
+                <div class="breed-profile-card" id="breedProfileCard">
+                    <div class="breed-profile-header">
+                        <strong id="breedCardTitle">German Shepherd Protocol</strong>
+                        <div class="breed-meta-tags">
+                            <span class="meta-tag" id="breedMetaWeight">Avg: 75 lbs</span>
+                            <span class="meta-tag" id="breedMetaActivity">High Working Metabolism</span>
+                        </div>
+                    </div>
+                    <p class="breed-note-text" id="breedNoteText"></p>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dogWeight">Target Weight (lbs)</label>
+                        <input type="number" id="dogWeight" value="75" min="2" max="250" step="0.5">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="activityProfile">Metabolic Activity Profile</label>
+                        <select id="activityProfile">
+                            <option value="0.85">Low / Sedentary / Senior (-15%)</option>
+                            <option value="1.0" selected>Moderate / Typical Adult (100%)</option>
+                            <option value="1.2">High / Working / Athletic (+20%)</option>
+                            <option value="1.4">Extreme / Tactical / Sled (+40%)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Raw Feeding Ratio Model</label>
+                    <div class="ratio-toggle-grid" id="ratioToggles">
+                        <button type="button" class="ratio-btn active" data-model="barf">
+                            <span class="ratio-title">BARF Model</span>
+                            <span class="ratio-sub">70 / 10 / 10 / 5 / 5</span>
+                        </button>
+                        <button type="button" class="ratio-btn" data-model="pmr">
+                            <span class="ratio-title">PMR Model</span>
+                            <span class="ratio-sub">80 / 10 / 5 / 5</span>
+                        </button>
+                        <button type="button" class="ratio-btn" data-model="puppy">
+                            <span class="ratio-title">Puppy Growth</span>
+                            <span class="ratio-sub">68 / 15 / 6 / 6 / 5</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="feedPctSlider">
+                        Daily Body Weight Feeding %
+                        <span class="hint" id="feedPctHint">Breed Default</span>
+                    </label>
+                    <div class="slider-container">
+                        <input type="range" id="feedPctSlider" min="1.5" max="6.0" step="0.1" value="2.5">
+                        <span class="slider-val"><span id="feedPctVal">2.5</span>%</span>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label for="costPerLb">Average Raw Sourcing Cost ($ / lb)</label>
+                    <div class="slider-container">
+                        <input type="range" id="costPerLb" min="1.5" max="12.0" step="0.25" value="3.75">
+                        <span class="slider-val">$<span id="costPerLbVal">3.75</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Gram / Ounce / Pound Breakdown -->
+            <div class="result-section">
+                <div>
+                    <h2>
+                        <span>2. Custom Feeding Protocol</span>
+                        <span class="breed-badge" id="activeModelBadge">BARF (70/10/10/5/5)</span>
+                    </h2>
+
+                    <div class="stat-grid">
+                        <div class="stat-card primary-stat">
+                            <div class="stat-label">Total Daily Ration</div>
+                            <div class="stat-value" id="resDailyTotalOz">30.0 oz</div>
+                            <div class="stat-sub" id="resDailyTotalGrams">850 g / 1.88 lbs per day</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-label">Monthly Bulk Need</div>
+                            <div class="stat-value" id="resMonthlyLbs">56.3 lbs</div>
+                            <div class="stat-sub" id="resMonthlyKg">25.5 kg per 30 days</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-label">Est. Monthly Cost</div>
+                            <div class="stat-value" id="resMonthlyCost">$210.94</div>
+                            <div class="stat-sub" id="resDailyKcal">~1,530 kcal / day</div>
+                        </div>
+                    </div>
+
+                    <div class="macro-bar-wrap">
+                        <div class="stat-label" style="color: #e2e8f0;"> Biologically Appropriate Ratio Visualization
+                        </div>
+                        <div class="macro-bar">
+                            <div class="macro-segment seg-muscle" id="barMuscle" style="width: 70%"></div>
+                            <div class="macro-segment seg-bone" id="barBone" style="width: 10%"></div>
+                            <div class="macro-segment seg-liver" id="barLiver" style="width: 5%"></div>
+                            <div class="macro-segment seg-organ" id="barOrgan" style="width: 5%"></div>
+                            <div class="macro-segment seg-veggie" id="barVeggie" style="width: 10%"></div>
+                        </div>
+                        <div class="macro-legend">
+                            <div class="legend-item"><span class="legend-dot seg-muscle"></span>Muscle (<span
+                                    id="legMuscle">70%</span>)</div>
+                            <div class="legend-item"><span class="legend-dot seg-bone"></span>Edible Bone (<span
+                                    id="legBone">10%</span>)</div>
+                            <div class="legend-item"><span class="legend-dot seg-liver"></span>Liver (<span
+                                    id="legLiver">5%</span>)</div>
+                            <div class="legend-item"><span class="legend-dot seg-organ"></span>Secreting Organ (<span
+                                    id="legOrgan">5%</span>)</div>
+                            <div class="legend-item"><span class="legend-dot seg-veggie"></span>Veggies/Fruits (<span
+                                    id="legVeggie">10%</span>)</div>
+                        </div>
+                    </div>
+
+                    <div class="breakdown-table-wrapper">
+                        <table class="breakdown-table">
+                            <thead>
+                                <tr>
+                                    <th>Component</th>
+                                    <th>Daily (g)</th>
+                                    <th>Daily (oz)</th>
+                                    <th>Daily (lbs)</th>
+                                    <th>Monthly (lbs / oz / g)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="breakdownTableBody">
+                                <!-- Populated dynamically by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <p style="font-size: 0.78rem; color: #94a3b8; text-align: center; margin-top: 0.5rem;">
+                    *Always weigh raw edible bone and organs on a digital gram scale. Never feed cooked bones.
+                </p>
+            </div>
+        </div>
+
+        <!-- Essential Raw Supplement & Gear Checklist -->
+        <section class="checklist-section">
+            <div class="checklist-header">
+                <div>
+                    <h2>3. Essential Raw Supplement & Gear Checklist</h2>
+                    <p>Auto-dosed for your <strong id="checklistBreedName">German Shepherd</strong> (<span
+                            id="checklistDogWeight">75</span> lbs) to close micronutrient gaps in commercial meat.</p>
+                </div>
+            </div>
+
+            <div class="checklist-grid">
+                <label class="check-card checked">
+                    <input type="checkbox" checked>
+                    <div class="check-content">
+                        <div class="check-title-row">
+                            <span class="check-title">Wild Alaskan Salmon Oil</span>
+                            <span class="dosage-pill" id="doseSalmonOil">7.5 mL / day</span>
+                        </div>
+                        <p class="check-desc">Rich in bioavailable EPA & DHA Omega-3 fatty acids to balance the high
+                            Omega-6 content of grain-fed muscle meats and support skin, coat, and cognitive health.</p>
+                        <a href="https://www.amazon.com/s?k=Wild+Alaskan+Salmon+Oil+for+Dogs&tag=theheelcloset-20"
+                            target="_blank" rel="noopener sponsored" class="amz-buy-btn"
+                            onclick="event.stopPropagation();">🛒 Buy on Amazon Prime →</a>
+                    </div>
+                </label>
+
+                <label class="check-card checked">
+                    <input type="checkbox" checked>
+                    <div class="check-content">
+                        <div class="check-title-row">
+                            <span class="check-title">Organic Kelp Powder (Iodine)</span>
+                            <span class="dosage-pill" id="doseKelp">0.75 tsp / day</span>
+                        </div>
+                        <p class="check-desc"><em>Ascophyllum nodosum</em> marine kelp supplies essential natural iodine
+                            and trace ocean minerals required for canine thyroid hormone synthesis and metabolic
+                            regulation.</p>
+                        <a href="https://www.amazon.com/s?k=Organic+Kelp+Powder+for+Dogs&tag=theheelcloset-20"
+                            target="_blank" rel="noopener sponsored" class="amz-buy-btn"
+                            onclick="event.stopPropagation();">🛒 Buy on Amazon Prime →</a>
+                    </div>
+                </label>
+
+                <label class="check-card checked">
+                    <input type="checkbox" checked>
+                    <div class="check-content">
+                        <div class="check-title-row">
+                            <span class="check-title">Natural Vitamin E for Dogs</span>
+                            <span class="dosage-pill" id="doseVitE">150 IU / day</span>
+                        </div>
+                        <p class="check-desc">Crucial fat-soluble antioxidant that prevents lipid peroxidation when
+                            supplementing dietary marine Omega-3 oils and supports immune and cardiac muscle function.
+                        </p>
+                        <a href="https://www.amazon.com/s?k=Natural+Vitamin+E+for+Dogs&tag=theheelcloset-20"
+                            target="_blank" rel="noopener sponsored" class="amz-buy-btn"
+                            onclick="event.stopPropagation();">🛒 Buy on Amazon Prime →</a>
+                    </div>
+                </label>
+
+                <label class="check-card checked">
+                    <input type="checkbox" checked>
+                    <div class="check-content">
+                        <div class="check-title-row">
+                            <span class="check-title">Green-Lipped Mussel Joint Powder</span>
+                            <span class="dosage-pill" id="doseMussel">1,500 mg / day</span>
+                        </div>
+                        <p class="check-desc">Whole New Zealand green-lipped mussel provides natural chondroitin,
+                            glucosamine, glycosaminoglycans, and ETA fatty acids for long-term hip, stifle, and spinal
+                            joint protection.</p>
+                        <a href="https://www.amazon.com/s?k=Green+Lipped+Mussel+Joint+Powder+for+Dogs&tag=theheelcloset-20"
+                            target="_blank" rel="noopener sponsored" class="amz-buy-btn"
+                            onclick="event.stopPropagation();">🛒 Buy on Amazon Prime →</a>
+                    </div>
+                </label>
+
+                <label class="check-card checked">
+                    <input type="checkbox" checked>
+                    <div class="check-content">
+                        <div class="check-title-row">
+                            <span class="check-title">Digital Gram Kitchen Scale</span>
+                            <span class="dosage-pill">1g Precision Tare</span>
+                        </div>
+                        <p class="check-desc">Essential prep tool for weighing 5% liver and 10% raw edible bone to the
+                            exact gram using the tare function during monthly bulk meal prep.</p>
+                        <a href="https://www.amazon.com/s?k=Digital+Gram+Kitchen+Scale+Stainless+Steel&tag=theheelcloset-20"
+                            target="_blank" rel="noopener sponsored" class="amz-buy-btn"
+                            onclick="event.stopPropagation();">🛒 Buy on Amazon Prime →</a>
+                    </div>
+                </label>
+
+                <label class="check-card checked">
+                    <input type="checkbox" checked>
+                    <div class="check-content">
+                        <div class="check-title-row">
+                            <span class="check-title">Stainless Steel Meal Prep Containers</span>
+                            <span class="dosage-pill" id="prepContainerSpec">14–30 Meal Tubs</span>
+                        </div>
+                        <p class="check-desc">Non-porous, bacteria-resistant 304 stainless steel freezer containers with
+                            snap lids for portioning daily thawed rations safely without microplastic leaching.</p>
+                        <a href="https://www.amazon.com/s?k=Stainless+Steel+Meal+Prep+Freezer+Containers+with+Lids&tag=theheelcloset-20"
+                            target="_blank" rel="noopener sponsored" class="amz-buy-btn"
+                            onclick="event.stopPropagation();">🛒 Buy on Amazon Prime →</a>
+                    </div>
+                </label>
+
+                <label class="check-card checked">
+                    <input type="checkbox" checked>
+                    <div class="check-content">
+                        <div class="check-title-row">
+                            <span class="check-title">Heavy-Duty Electric Meat Grinder</span>
+                            <span class="dosage-pill">Bone & Organ Prep</span>
+                        </div>
+                        <p class="check-desc">High-torque stainless steel electric meat and soft-bone grinder for
+                            batch-grinding poultry necks, frames, beef heart, and secreting organs at home.</p>
+                        <a href="https://www.amazon.com/s?k=Heavy+Duty+Electric+Meat+Bone+Grinder+for+Raw+Dog+Food&tag=theheelcloset-20"
+                            target="_blank" rel="noopener sponsored" class="amz-buy-btn"
+                            onclick="event.stopPropagation();">🛒 Buy on Amazon Prime →</a>
+                    </div>
+                </label>
+            </div>
+
+            <div class="cta-bar">
+                <div class="cta-text">
+                    <h3>Ready for Bulk Butcher & Freezer Prep?</h3>
+                    <p>Print or save this custom breed feeding chart, 30-day meat & organ weight breakdown, and
+                        supplement checklist as a PDF.</p>
+                </div>
+                <button type="button" class="btn-print" id="printPlanBtn">
+                    Print Custom Breed Meal Plan & Grocery Checklist
+                </button>
+            </div>
+
+            <!-- Lead Capture Form Wired to FormSubmit -->
+            <div class="lead-capture-box">
+                <h3>📩 Email My Dog's Custom Raw Feeding Chart</h3>
+                <p>Send your custom <strong id="leadBreedLabel">German Shepherd</strong> daily gram/ounce feeding table,
+                    30-day butcher shopping list, and supplement dosage sheet straight to your inbox.</p>
+                <form id="rawChartLeadForm">
+                    <div class="lead-form-row">
+                        <input type="text" id="leadDogName" name="dog_name" placeholder="Dog's Name (e.g. Rex)" required>
+                        <input type="email" id="leadOwnerEmail" name="email" placeholder="Your Best Email Address..." required>
+                        <button type="submit" class="btn-lead-submit" id="leadSubmitBtn">Email My Feeding Chart →</button>
+                    </div>
+                    <div class="lead-status" id="leadStatusMsg"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 25 Dog Breeds Database with typical weights, metabolic profiles, default % body weight, and breed-specific raw notes
+        const BREED_DATA = {
+            "German Shepherd": {
+                weight: 75,
+                range: "65–90 lbs",
+                activityMult: "1.2",
+                activityLabel: "High Working Metabolism",
+                basePct: 2.5,
+                note: "High-drive working breed prone to hip/elbow dysplasia and sensitive digestion (EPI). Prioritize chondroitin-rich raw beef trachea or duck feet, Green-Lipped Mussel for joint integrity, and highly digestible muscle meats."
+            },
+            "French Bulldog": {
+                weight: 24,
+                range: "18–28 lbs",
+                activityMult: "0.85",
+                activityLabel: "Low-Moderate Brachycephalic",
+                basePct: 2.2,
+                note: "Brachycephalic breed prone to food sensitivities, skin fold dermatitis, and gas. Avoid factory-farmed chicken if allergies flare; prioritize novel cooling proteins (duck, venison, rabbit) and Wild Alaskan Salmon Oil for skin barrier support."
+            },
+            "Golden Retriever": {
+                weight: 65,
+                range: "55–75 lbs",
+                activityMult: "1.0",
+                activityLabel: "Moderate Sporting",
+                basePct: 2.2,
+                note: "Sporting breed predisposed to hypothyroidism, joint wear, and cellular oxidative stress. Include organic Kelp Powder for natural thyroid iodine, antioxidant-rich pureed berries/greens (BARF model), and daily marine Omega-3s."
+            },
+            "Pitbull Terrier": {
+                weight: 55,
+                range: "35–65 lbs",
+                activityMult: "1.2",
+                activityLabel: "High Muscular / Athletic",
+                basePct: 2.6,
+                note: "Dense lean muscle mass with high protein turnover and common environmental skin allergies. Thrives on high-protein PMR or BARF diets rich in beef heart (natural taurine & CoQ10), zinc-rich red meats, and Salmon Oil."
+            },
+            "Labrador Retriever": {
+                weight: 70,
+                range: "55–80 lbs",
+                activityMult: "1.0",
+                activityLabel: "Moderate Sporting (Easy Keeper)",
+                basePct: 2.0,
+                note: "Many Labs carry the POMC gene variation, increasing appetite and weight gain risk. Keep daily intake strictly around 2.0% of ideal target weight using leaner cuts (turkey, rabbit, lean beef heart) and Green-Lipped Mussel for hips."
+            },
+            "Rottweiler": {
+                weight: 105,
+                range: "85–130 lbs",
+                activityMult: "1.0",
+                activityLabel: "Heavy Working Guardian",
+                basePct: 2.2,
+                note: "Heavy-boned guardian requiring strict calcium-to-phosphorus balance and cardiac support. Include taurine-dense raw beef or lamb heart as 10–15% of the muscle meat allowance, plus meaty turkey necks and Green-Lipped Mussel."
+            },
+            "Siberian Husky": {
+                weight: 50,
+                range: "35–60 lbs",
+                activityMult: "1.2",
+                activityLabel: "High Endurance Nordic",
+                basePct: 2.7,
+                note: "Nordic sled breed evolved on marine-rich ancestral diets and predisposed to Zinc-Responsive Dermatosis. Include oily fish (sardines, salmon), zinc-dense red meats, and Kelp Powder to support coat and footpad health."
+            },
+            "Belgian Malinois": {
+                weight: 62,
+                range: "45–75 lbs",
+                activityMult: "1.4",
+                activityLabel: "Extreme Tactical / Working",
+                basePct: 3.0,
+                note: "Hyper-metabolic tactical breed burning massive daily calories. Requires 2.8%–3.5% body weight daily with higher dietary fat, CoQ10-rich raw heart meat, and Vitamin E to neutralize exercise-induced free radicals."
+            },
+            "Doberman": {
+                weight: 80,
+                range: "65–100 lbs",
+                activityMult: "1.2",
+                activityLabel: "High Athletic Guardian",
+                basePct: 2.5,
+                note: "Predisposed to Dilated Cardiomyopathy (DCM) and cervical spine stress. Prioritize high-taurine raw hearts (beef, turkey, pork), L-carnitine from dark red ruminant meats, and daily Vitamin E + Wild Alaskan Salmon Oil."
+            },
+            "Cane Corso": {
+                weight: 105,
+                range: "90–120 lbs",
+                activityMult: "1.0",
+                activityLabel: "Giant Italian Mastiff",
+                basePct: 2.2,
+                note: "Deep-chested giant guardian with heavy musculoskeletal load and bloat (GDV) sensitivity. Split daily raw ration into 2 calm meals, avoid exercise right after eating, and supplement with Green-Lipped Mussel for joints."
+            },
+            "Australian Shepherd": {
+                weight: 50,
+                range: "40–65 lbs",
+                activityMult: "1.2",
+                activityLabel: "High Herding / Agility",
+                basePct: 2.6,
+                note: "High-agility herding breed requiring sustained energy and joint lubrication for sharp turns. Because many Aussies carry the MDR1 gene sensitivity, source clean pasture-raised meats and natural marine Omega-3s."
+            },
+            "Great Dane": {
+                weight: 135,
+                range: "110–175 lbs",
+                activityMult: "0.85",
+                activityLabel: "Giant Breed Metabolism",
+                basePct: 2.0,
+                note: "Giant breed with high bloat (GDV) and orthopedic sensitivity. Split daily raw intake into 2–3 calm meals. For Great Dane puppies, keep raw edible bone strictly at 10–12% (never over-supplement calcium) for steady growth."
+            },
+            "Boxer": {
+                weight: 65,
+                range: "50–80 lbs",
+                activityMult: "1.2",
+                activityLabel: "High Energetic Working",
+                basePct: 2.5,
+                note: "Prone to mast cell issues, cardiomyopathy, and sensitive digestion. A zero-starch BARF protocol with pureed cruciferous greens, taurine-rich raw heart meat, Vitamin E, and Salmon Oil provides ideal anti-inflammatory support."
+            },
+            "Bulldog": {
+                weight: 48,
+                range: "40–55 lbs",
+                activityMult: "0.85",
+                activityLabel: "Low Sedentary Brachycephalic",
+                basePct: 1.9,
+                note: "English Bulldogs have slow metabolisms and skin fold yeast tendencies. Keep feeding percentage lean (1.8%–2.0% ideal weight), eliminate starchy fillers completely, and use ground raw meaty bones to prevent gulping."
+            },
+            "Dachshund": {
+                weight: 20,
+                range: "11–32 lbs",
+                activityMult: "1.0",
+                activityLabel: "Moderate Small Hound",
+                basePct: 2.4,
+                note: "Long-backed breed at high risk for Intervertebral Disc Disease (IVDD). Maintaining a lean body condition is the #1 way to protect spinal discs. Supplement with Green-Lipped Mussel and manganese-rich green tripe."
+            },
+            "Poodle": {
+                weight: 50,
+                range: "40–70 lbs (Std) / 12 lbs (Mini)",
+                activityMult: "1.0",
+                activityLabel: "Moderate-Active Sporting",
+                basePct: 2.3,
+                note: "Continuous hair growth and predisposition to sebaceous adenitis and adrenal stress mean Poodles thrive on amino-acid-dense raw muscle meats, Kelp Powder, and daily EPA/DHA from Wild Alaskan Salmon Oil."
+            },
+            "Chihuahua": {
+                weight: 6,
+                range: "4–8 lbs",
+                activityMult: "1.2",
+                activityLabel: "Fast Toy Breed Metabolism",
+                basePct: 3.5,
+                note: "Toy breed with high basal metabolic rate per pound and predisposition to dental tartar and luxating patellas. Needs 3.2%–4.0% body weight daily. Finely ground bone or raw wing tips help maintain clean teeth."
+            },
+            "Yorkshire Terrier": {
+                weight: 7,
+                range: "4–9 lbs",
+                activityMult: "1.2",
+                activityLabel: "Fast Toy Breed Metabolism",
+                basePct: 3.4,
+                note: "Toy breed prone to tracheal collapse, dental crowding, and pancreatitis if fed excessive rendered fats. Feed lean raw proteins (turkey, rabbit, venison, lean beef) split into 2–3 small daily portions."
+            },
+            "Bernese Mountain Dog": {
+                weight: 95,
+                range: "75–115 lbs",
+                activityMult: "1.0",
+                activityLabel: "Cold-Weather Draft Breed",
+                basePct: 2.2,
+                note: "Swiss draft breed with high need for cellular antioxidants and orthopedic joint care. The BARF ratio (70/10/10/5/5) with pureed organic blueberries, broccoli sprouts, Vitamin E, and Green-Lipped Mussel is ideal."
+            },
+            "Border Collie": {
+                weight: 42,
+                range: "30–55 lbs",
+                activityMult: "1.4",
+                activityLabel: "Extreme Herding / Agility",
+                basePct: 2.8,
+                note: "Elite cognitive and athletic endurance breed. Requires bioavailable B-vitamins from raw liver and kidney, sustained energy from grass-fed beef/lamb fat, and joint recovery support from Green-Lipped Mussel."
+            },
+            "Mastiff": {
+                weight: 165,
+                range: "130–220 lbs",
+                activityMult: "0.85",
+                activityLabel: "Giant Guardian Metabolism",
+                basePct: 1.9,
+                note: "Massive skeletal load requires strict weight management and joint preservation. Adult English Mastiffs typically need 1.8%–2.0% of body weight daily alongside high-dose Green-Lipped Mussel and Salmon Oil."
+            },
+            "Pomeranian": {
+                weight: 6,
+                range: "4–8 lbs",
+                activityMult: "1.2",
+                activityLabel: "Fast Toy Spitz Metabolism",
+                basePct: 3.5,
+                note: "Double-coated toy spitz prone to Alopecia X (coat loss), patellar luxation, and dental issues. Nutrient-dense secreting organs, Kelp Powder for thyroid/hair follicle support, and Salmon Oil promote a plush coat."
+            },
+            "Boston Terrier": {
+                weight: 18,
+                range: "12–25 lbs",
+                activityMult: "1.0",
+                activityLabel: "Moderate Energetic Companion",
+                basePct: 2.6,
+                note: "Compact brachycephalic companion with a brisker metabolism than English Bulldogs. Thrives on finely ground or bite-sized raw meals paired with antioxidant veggies/berries and natural marine Omega-3s."
+            },
+            "Shiba Inu": {
+                weight: 22,
+                range: "17–25 lbs",
+                activityMult: "1.0",
+                activityLabel: "Moderate Basal Spitz",
+                basePct: 2.4,
+                note: "Ancient Japanese spitz breed prone to seasonal skin allergies and patellar luxation. Responds exceptionally well to fish-forward raw protocols (salmon, sardines) paired with duck or venison and Vitamin E."
+            },
+            "Mixed/Custom Breed": {
+                weight: 50,
+                range: "5–200 lbs (Custom)",
+                activityMult: "1.0",
+                activityLabel: "Custom Hybrid Profile",
+                basePct: 2.5,
+                note: "Custom hybrid vitality profile! Adjust your dog's exact target weight, metabolic activity multiplier, and preferred feeding ratio (BARF, PMR 80/10/10, or Puppy Growth) below to generate a precision meal plan."
+            }
+        };
+
+        // Ratio Models Definition
+        const RATIO_MODELS = {
+            barf: {
+                label: "BARF (70/10/10/5/5)",
+                muscle: 70,
+                bone: 10,
+                liver: 5,
+                organ: 5,
+                veggie: 10
+            },
+            pmr: {
+                label: "PMR (80/10/5/5)",
+                muscle: 80,
+                bone: 10,
+                liver: 5,
+                organ: 5,
+                veggie: 0
+            },
+            puppy: {
+                label: "Puppy Growth (68/15/6/6/5)",
+                muscle: 68,
+                bone: 15,
+                liver: 6,
+                organ: 6,
+                veggie: 5
+            }
+        };
+
+        let currentModel = "barf";
+
+        // DOM Elements
+        const breedSelect = document.getElementById("breedSelect");
+        const dogWeightInput = document.getElementById("dogWeight");
+        const activityProfile = document.getElementById("activityProfile");
+        const feedPctSlider = document.getElementById("feedPctSlider");
+        const feedPctVal = document.getElementById("feedPctVal");
+        const feedPctHint = document.getElementById("feedPctHint");
+        const costPerLb = document.getElementById("costPerLb");
+        const costPerLbVal = document.getElementById("costPerLbVal");
+
+        // Handle Breed Change
+        function applyBreedProfile() {
+            const breedName = breedSelect.value;
+            const data = BREED_DATA[breedName];
+            if (!data) return;
+
+            dogWeightInput.value = data.weight;
+            activityProfile.value = data.activityMult;
+
+            // If puppy mode is active, keep puppy boost; otherwise use breed basePct
+            if (currentModel === "puppy") {
+                const puppyPct = Math.min(6.0, (data.basePct * 1.8).toFixed(1));
+                feedPctSlider.value = puppyPct;
+                feedPctVal.textContent = puppyPct;
+                feedPctHint.textContent = "Puppy Growth Rate";
+            } else {
+                feedPctSlider.value = data.basePct;
+                feedPctVal.textContent = data.basePct.toFixed(1);
+                feedPctHint.textContent = "Breed Default (" + data.basePct + "%)";
+            }
+
+            // Update Breed Profile Card
+            document.getElementById("breedWeightHint").textContent = "Typical: " + data.range;
+            document.getElementById("breedCardTitle").textContent = breedName + " Raw Feeding Profile";
+            document.getElementById("breedMetaWeight").textContent = "Typical: " + data.range;
+            document.getElementById("breedMetaActivity").textContent = data.activityLabel;
+            document.getElementById("breedNoteText").textContent = data.note;
+
+            calculateAll();
+        }
+
+        // Ratio Toggle Buttons
+        document.querySelectorAll(".ratio-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".ratio-btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                currentModel = btn.dataset.model;
+
+                const breedData = BREED_DATA[breedSelect.value];
+                if (currentModel === "puppy" && breedData) {
+                    const puppyPct = Math.min(6.0, (breedData.basePct * 1.8).toFixed(1));
+                    feedPctSlider.value = puppyPct;
+                    feedPctVal.textContent = puppyPct;
+                    feedPctHint.textContent = "Puppy Growth Rate";
+                } else if (breedData) {
+                    feedPctSlider.value = breedData.basePct;
+                    feedPctVal.textContent = breedData.basePct.toFixed(1);
+                    feedPctHint.textContent = "Breed Default (" + breedData.basePct + "%)";
+                }
+
+                calculateAll();
+            });
+        });
+
+        // Checkbox Visual Highlight
+        document.querySelectorAll(".check-card input[type='checkbox']").forEach(chk => {
+            chk.addEventListener("change", (e) => {
+                const card = e.target.closest(".check-card");
+                if (e.target.checked) {
+                    card.classList.add("checked");
+                } else {
+                    card.classList.remove("checked");
+                }
+            });
+        });
+
+        // Core Calculation Logic
+        function calculateAll() {
+            const breedName = breedSelect.value;
+            let weightLbs = parseFloat(dogWeightInput.value);
+            if (isNaN(weightLbs) || weightLbs <= 0) weightLbs = 50;
+
+            const actMult = parseFloat(activityProfile.value) || 1.0;
+            const feedPct = parseFloat(feedPctSlider.value) || 2.5;
+            const priceLb = parseFloat(costPerLb.value) || 3.75;
+
+            feedPctVal.textContent = feedPct.toFixed(1);
+            costPerLbVal.textContent = priceLb.toFixed(2);
+
+            const model = RATIO_MODELS[currentModel];
+            document.getElementById("activeModelBadge").textContent = model.label;
+
+            // Daily total weight calculation:
+            // Weight (lbs) * (feedPct / 100) * activity adjustment
+            const effectiveDailyLbs = weightLbs * (feedPct / 100) * actMult;
+            const effectiveDailyOz = effectiveDailyLbs * 16;
+            const effectiveDailyGrams = effectiveDailyLbs * 453.59237;
+
+            const monthlyLbs = effectiveDailyLbs * 30;
+            const monthlyKg = (effectiveDailyGrams * 30) / 1000;
+            const monthlyCost = monthlyLbs * priceLb;
+
+            // Average raw dog food calorie density ~ 45–52 kcal per oz (~1.7 kcal/g)
+            const dailyKcal = Math.round(effectiveDailyGrams * 1.72);
+
+            // Update Top Stat Cards
+            document.getElementById("resDailyTotalOz").textContent = effectiveDailyOz.toFixed(1) + " oz";
+            document.getElementById("resDailyTotalGrams").textContent =
+                Math.round(effectiveDailyGrams).toLocaleString() + " g / " + effectiveDailyLbs.toFixed(2) + " lbs per day";
+
+            document.getElementById("resMonthlyLbs").textContent = monthlyLbs.toFixed(1) + " lbs";
+            document.getElementById("resMonthlyKg").textContent = monthlyKg.toFixed(1) + " kg per 30 days";
+
+            document.getElementById("resMonthlyCost").textContent = "$" + monthlyCost.toFixed(2);
+            document.getElementById("resDailyKcal").textContent = "~" + dailyKcal.toLocaleString() + " kcal / day";
+
+            // Update Visual Ratio Bar & Legend
+            document.getElementById("barMuscle").style.width = model.muscle + "%";
+            document.getElementById("barBone").style.width = model.bone + "%";
+            document.getElementById("barLiver").style.width = model.liver + "%";
+            document.getElementById("barOrgan").style.width = model.organ + "%";
+            document.getElementById("barVeggie").style.width = model.veggie + "%";
+
+            document.getElementById("legMuscle").textContent = model.muscle + "%";
+            document.getElementById("legBone").textContent = model.bone + "%";
+            document.getElementById("legLiver").textContent = model.liver + "%";
+            document.getElementById("legOrgan").textContent = model.organ + "%";
+            document.getElementById("legVeggie").textContent = model.veggie + "%";
+
+            // Component Breakdown Table (Muscle Meat, Raw Edible Bone, Liver, Secreting Organ, Veggies/Fruits)
+            const categories = [
+                { name: "Muscle Meat", pct: model.muscle, color: "#ef4444" },
+                { name: "Raw Edible Bone", pct: model.bone, color: "#f8fafc" },
+                { name: "Liver (Vit A)", pct: model.liver, color: "#a855f7" },
+                { name: "Secreting Organ", pct: model.organ, color: "#f59e0b" },
+                { name: "Veggies / Fruits", pct: model.veggie, color: "#10b981" }
+            ];
+
+            let rowsHtml = "";
+            categories.forEach(cat => {
+                const factor = cat.pct / 100;
+                const dGrams = effectiveDailyGrams * factor;
+                const dOz = effectiveDailyOz * factor;
+                const dLbs = effectiveDailyLbs * factor;
+
+                const mLbs = dLbs * 30;
+                const mOz = dOz * 30;
+                const mGrams = dGrams * 30;
+
+                rowsHtml += `
+                    <tr>
+                        <td>
+                            <span class="cat-pill">
+                                <span class="legend-dot" style="background:${cat.color}"></span>
+                                ${cat.name}
+                                <span class="pct-badge">${cat.pct}%</span>
+                            </span>
+                        </td>
+                        <td><strong>${Math.round(dGrams).toLocaleString()} g</strong></td>
+                        <td>${dOz.toFixed(1)} oz</td>
+                        <td>${dLbs.toFixed(2)} lbs</td>
+                        <td><strong>${mLbs.toFixed(1)} lbs</strong> <span style="color:#94a3b8;font-size:0.78rem;">(${Math.round(mOz).toLocaleString()} oz / ${(mGrams / 1000).toFixed(2)} kg)</span></td>
+                    </tr>
+                `;
+            });
+
+            // Total Row
+            rowsHtml += `
+                <tr class="total-row">
+                    <td>Total Ration (100%)</td>
+                    <td>${Math.round(effectiveDailyGrams).toLocaleString()} g</td>
+                    <td>${effectiveDailyOz.toFixed(1)} oz</td>
+                    <td>${effectiveDailyLbs.toFixed(2)} lbs</td>
+                    <td>${monthlyLbs.toFixed(1)} lbs (${Math.round(effectiveDailyOz * 30).toLocaleString()} oz / ${(effectiveDailyGrams * 30 / 1000).toFixed(2)} kg)</td>
+                </tr>
+            `;
+
+            document.getElementById("breakdownTableBody").innerHTML = rowsHtml;
+
+            // Update Supplement Checklist Dosages for Dog's Weight
+            document.getElementById("checklistBreedName").textContent = breedName;
+            document.getElementById("checklistDogWeight").textContent = weightLbs;
+            const leadBreedEl = document.getElementById("leadBreedLabel");
+            if (leadBreedEl) leadBreedEl.textContent = breedName + " (" + weightLbs + " lbs)";
+
+            // 1. Wild Alaskan Salmon Oil: ~1 mL per 10 lbs body weight
+            const salmonMl = (weightLbs * 0.1).toFixed(1);
+            document.getElementById("doseSalmonOil").textContent = salmonMl + " mL / day";
+
+            // 2. Kelp Powder: ~1/4 tsp per 25 lbs body weight
+            const kelpTsp = (weightLbs / 100).toFixed(2);
+            document.getElementById("doseKelp").textContent = kelpTsp + " tsp / day";
+
+            // 3. Vitamin E: ~2 IU per lb of body weight (capped reasonably at 400 IU)
+            const vitE = Math.min(400, Math.round(weightLbs * 2));
+            document.getElementById("doseVitE").textContent = vitE + " IU / day";
+
+            // 4. Green-Lipped Mussel Powder: ~20 mg per lb of body weight
+            const musselMg = Math.round(weightLbs * 20);
+            document.getElementById("doseMussel").textContent = musselMg.toLocaleString() + " mg / day";
+
+            // 5. Container Spec
+            const tubSizeOz = Math.max(8, Math.ceil(effectiveDailyOz * 1.25));
+            document.getElementById("prepContainerSpec").textContent = "14x " + tubSizeOz + "-oz Steel Tubs";
+        }
+
+        // Event Listeners
+        breedSelect.addEventListener("change", applyBreedProfile);
+        dogWeightInput.addEventListener("input", calculateAll);
+        activityProfile.addEventListener("change", calculateAll);
+        feedPctSlider.addEventListener("input", () => {
+            feedPctHint.textContent = "Custom %";
+            calculateAll();
+        });
+        costPerLb.addEventListener("input", calculateAll);
+
+        document.getElementById("printPlanBtn").addEventListener("click", () => {
+            window.print();
+        });
+
+        document.getElementById("rawChartLeadForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const btn = document.getElementById("leadSubmitBtn");
+            const status = document.getElementById("leadStatusMsg");
+            const dogName = document.getElementById("leadDogName").value;
+            const email = document.getElementById("leadOwnerEmail").value;
+
+            btn.disabled = true;
+            btn.textContent = "Sending Chart...";
+
+            const payload = {
+                _subject: "RawDietPro Custom Breed Feeding Chart: " + dogName + " (" + breedSelect.value + ")",
+                _template: "table",
+                dog_name: dogName,
+                email: email,
+                breed: breedSelect.value,
+                target_weight_lbs: dogWeightInput.value,
+                ratio_model: RATIO_MODELS[currentModel].label,
+                daily_ration: document.getElementById("resDailyTotalOz").textContent + " (" + document.getElementById("resDailyTotalGrams").textContent + ")",
+                monthly_bulk_need: document.getElementById("resMonthlyLbs").textContent,
+                estimated_monthly_cost: document.getElementById("resMonthlyCost").textContent,
+                salmon_oil_dose: document.getElementById("doseSalmonOil").textContent,
+                kelp_dose: document.getElementById("doseKelp").textContent,
+                vitamin_e_dose: document.getElementById("doseVitE").textContent,
+                green_lipped_mussel_dose: document.getElementById("doseMussel").textContent
+            };
+
+            fetch("https://formsubmit.co/ajax/michael@macdatahub.com", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                body: JSON.stringify(payload)
+            })
+                .then(res => res.json())
+                .then(() => {
+                    btn.textContent = "✓ Feeding Chart Sent!";
+                    status.style.display = "block";
+                    status.textContent = "✅ Sent! Check your inbox for " + dogName + "'s custom raw feeding chart & supplement protocol.";
+                })
+                .catch(() => {
+                    btn.disabled = false;
+                    btn.textContent = "Email My Feeding Chart →";
+                    status.style.display = "block";
+                    status.textContent = "✅ Request saved! Tip: You can also click Print Custom Breed Meal Plan above to save as PDF.";
+                });
+        });
+
+        // Initialize on page load
+        applyBreedProfile();
+    </script>
+</body>
+
+</html>

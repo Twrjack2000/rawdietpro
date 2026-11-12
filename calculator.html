@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raw Diet Nutrition & Cost Calculator</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --secondary: #0f172a;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .top-nav {
+            width: 100%;
+            max-width: 900px;
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 0.85rem 1.5rem;
+            margin-bottom: 1.75rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .brand-logo {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--secondary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            padding: 0.5rem 0.95rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary);
+            background: #f1f5f9;
+        }
+
+        .nav-link.active {
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--primary-dark);
+        }
+
+        .calculator-container {
+            background-color: var(--card-bg);
+            max-width: 900px;
+            width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media(min-width: 768px) {
+            .calculator-container {
+                flex-direction: row;
+            }
+        }
+
+        .input-section {
+            padding: 2.5rem;
+            flex: 1;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .result-section {
+            padding: 2.5rem;
+            flex: 1;
+            background: linear-gradient(135deg, var(--secondary) 0%, #1e293b 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+            letter-spacing: -0.02em;
+        }
+
+        .input-section h2 {
+            margin-bottom: 2rem;
+        }
+
+        .result-section h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            background-color: #f8fafc;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+            background-color: white;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            accent-color: var(--primary);
+        }
+
+        .slider-val {
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.125rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Results Styling */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            color: white;
+        }
+
+        .primary-stat {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border: none;
+            box-shadow: var(--shadow-md);
+        }
+
+        .primary-stat .stat-value {
+            font-size: 3rem;
+            line-height: 1;
+        }
+
+        .macro-bar {
+            display: flex;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .macro-segment {
+            height: 100%;
+        }
+
+        .protein {
+            background-color: #3b82f6;
+        }
+
+        .fat {
+            background-color: #eab308;
+        }
+
+        .carbs {
+            background-color: #ef4444;
+        }
+
+        /* If applicable, though raw diet is usually low carb */
+
+        .macro-legend {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .legend-item span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+
+        /* Supplements & Prep Gear Affiliate Section + Lead Capture */
+        .monetization-wrapper {
+            max-width: 900px;
+            width: 100%;
+            margin-top: 2rem;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            padding: 2.25rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .monetization-wrapper h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.55rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 0.35rem;
+        }
+
+        .monetization-wrapper p.sec-sub {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.35rem;
+        }
+
+        .amz-gear-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .amz-gear-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.15rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 0.75rem;
+            transition: all 0.2s ease;
+        }
+
+        .amz-gear-card:hover {
+            border-color: var(--primary);
+            background: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .amz-gear-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .amz-gear-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        .amz-buy-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            background: #ff9900;
+            color: #0f172a;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 0.84rem;
+            text-decoration: none;
+            padding: 0.55rem 0.9rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .amz-buy-btn:hover {
+            background: #f59e0b;
+        }
+
+        .lead-capture-box {
+            background: #f0fdf4;
+            border: 2px solid #86efac;
+            border-radius: 14px;
+            padding: 1.5rem 1.75rem;
+        }
+
+        .lead-capture-box h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #065f46;
+            margin-bottom: 0.25rem;
+        }
+
+        .lead-capture-box p {
+            font-size: 0.9rem;
+            color: #166534;
+            margin-bottom: 1rem;
+        }
+
+        .lead-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr auto;
+            gap: 0.75rem;
+        }
+
+        @media (max-width: 720px) {
+            .lead-form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .lead-form-row input {
+            padding: 0.75rem 1rem;
+            border: 2px solid #bbf7d0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            background: #ffffff;
+        }
+
+        .btn-lead {
+            background: var(--secondary);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 1.3rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-lead:hover {
+            background: var(--primary-dark);
+        }
+
+        .lead-status {
+            margin-top: 0.65rem;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #047857;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="top-nav">
+        <a href="calculator.html" class="brand-logo">RawDiet<span>Pro</span></a>
+        <div class="nav-links">
+            <a href="calculator.html" class="nav-link active">Nutrition & Cost Calculator</a>
+            <a href="breed-raw-calculator.html" class="nav-link">Breed-Specific Calculator</a>
+            <a href="meal-prep-builder.html" class="nav-link">Meal Prep Builder</a>
+        </div>
+    </nav>
+
+    <div class="calculator-container">
+        <div class="input-section">
+            <h2>Raw Diet Profile</h2>
+
+            <div class="form-group">
+                <label for="dietType">Raw Diet Type</label>
+                <select id="dietType">
+                    <option value="pet">Pet (Dog/Cat - PMR/BARF)</option>
+                    <option value="human">Human (Raw Vegan / Keto)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="weight">Target Weight (lbs)</label>
+                <input type="number" id="weight" value="50" min="1" max="400">
+            </div>
+
+            <div class="form-group">
+                <label for="activity">Activity Level</label>
+                <select id="activity">
+                    <option value="1.2">Low (Sedentary)</option>
+                    <option value="1.5" selected>Moderate (Average)</option>
+                    <option value="1.8">High (Athletic/Working)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="meatCost">Average Cost per lb ($)</label>
+                <div class="slider-container">
+                    <input type="range" id="meatCost" min="1" max="15" step="0.5" value="4.5">
+                    <span class="slider-val">$<span id="costVal">4.50</span></span>
+                </div>
+            </div>
+
+            <button class="btn" id="calculateBtn">Calculate Daily Needs</button>
+        </div>
+
+        <div class="result-section">
+            <h2>Your Protocol</h2>
+
+            <div class="stat-grid">
+                <div class="stat-card primary-stat">
+                    <div class="stat-label">Daily Intake Required</div>
+                    <div class="stat-value" id="resVolume">16 oz</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">Estimated Calories</div>
+                    <div class="stat-value" id="resCals">850</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">Monthly Cost</div>
+                    <div class="stat-value" id="resCost">$135.00</div>
+                </div>
+            </div>
+
+            <div class="stat-label" style="color: white; margin-bottom:0.25rem;">Ideal Macro Breakdown</div>
+            <div class="macro-bar">
+                <div class="macro-segment protein" id="barProtein" style="width: 80%"></div>
+                <div class="macro-segment fat" id="barFat" style="width: 10%"></div>
+                <div class="macro-segment carbs" id="barCarbs" style="width: 10%"></div>
+            </div>
+            <div class="macro-legend">
+                <div class="legend-item"><span style="background: #3b82f6;"></span>Muscle/Protein (<span
+                        id="lblProtein">80%</span>)</div>
+                <div class="legend-item"><span style="background: #eab308;"></span>Bone/Fat (<span
+                        id="lblFat">10%</span>)</div>
+                <div class="legend-item"><span style="background: #ef4444;"></span>Organ/Plant (<span
+                        id="lblCarbs">10%</span>)</div>
+            </div>
+
+            <p style="font-size: 0.8rem; color: #64748b; margin-top: 2rem; text-align: center;">
+                *Estimates based on standard PMR/BARF or raw nutrition formulas. Adhere to a 80/10/10 ratio for pets.
+            </p>
+        </div>
+    </div>
+
+    <section class="monetization-wrapper">
+        <h3>🛒 Essential Raw Feeding Supplements & Prep Gear (Amazon Prime)</h3>
+        <p class="sec-sub">Close key micronutrient gaps (Omega-3 EPA/DHA, thyroid iodine, Vitamin E, and joint chondroitin) and portion raw meals safely.</p>
+
+        <div class="amz-gear-grid">
+            <div class="amz-gear-card">
+                <div>
+                    <div class="amz-gear-title">Wild Alaskan Salmon Oil</div>
+                    <div class="amz-gear-desc">EPA & DHA Omega-3 fatty acids to balance grain-fed meats and nourish skin, coat & joints.</div>
+                </div>
+                <a href="https://www.amazon.com/s?k=Wild+Alaskan+Salmon+Oil+for+Dogs&tag=theheelcloset-20" target="_blank" rel="noopener sponsored" class="amz-buy-btn">🛒 Buy on Amazon Prime →</a>
+            </div>
+
+            <div class="amz-gear-card">
+                <div>
+                    <div class="amz-gear-title">Organic Kelp Powder</div>
+                    <div class="amz-gear-desc">Natural marine iodine (Ascophyllum nodosum) and trace minerals for healthy thyroid metabolism.</div>
+                </div>
+                <a href="https://www.amazon.com/s?k=Organic+Kelp+Powder+for+Dogs&tag=theheelcloset-20" target="_blank" rel="noopener sponsored" class="amz-buy-btn">🛒 Buy on Amazon Prime →</a>
+            </div>
+
+            <div class="amz-gear-card">
+                <div>
+                    <div class="amz-gear-title">Natural Vitamin E for Dogs</div>
+                    <div class="amz-gear-desc">Essential fat-soluble antioxidant required whenever supplementing marine Omega-3 fish oils.</div>
+                </div>
+                <a href="https://www.amazon.com/s?k=Natural+Vitamin+E+for+Dogs&tag=theheelcloset-20" target="_blank" rel="noopener sponsored" class="amz-buy-btn">🛒 Buy on Amazon Prime →</a>
+            </div>
+
+            <div class="amz-gear-card">
+                <div>
+                    <div class="amz-gear-title">Green-Lipped Mussel Joint Powder</div>
+                    <div class="amz-gear-desc">Whole New Zealand green-lipped mussel rich in natural chondroitin, glucosamine & ETA fatty acids.</div>
+                </div>
+                <a href="https://www.amazon.com/s?k=Green+Lipped+Mussel+Joint+Powder+for+Dogs&tag=theheelcloset-20" target="_blank" rel="noopener sponsored" class="amz-buy-btn">🛒 Buy on Amazon Prime →</a>
+            </div>
+
+            <div class="amz-gear-card">
+                <div>
+                    <div class="amz-gear-title">Digital Gram Kitchen Scale</div>
+                    <div class="amz-gear-desc">1g precision tare scale for accurately weighing 80% muscle, 10% bone, and 10% secreting organs.</div>
+                </div>
+                <a href="https://www.amazon.com/s?k=Digital+Gram+Kitchen+Scale+Stainless+Steel&tag=theheelcloset-20" target="_blank" rel="noopener sponsored" class="amz-buy-btn">🛒 Buy on Amazon Prime →</a>
+            </div>
+
+            <div class="amz-gear-card">
+                <div>
+                    <div class="amz-gear-title">Stainless Steel Meal Prep Containers</div>
+                    <div class="amz-gear-desc">304 stainless steel freezer containers with snap lids for hygienic daily raw meal portioning.</div>
+                </div>
+                <a href="https://www.amazon.com/s?k=Stainless+Steel+Meal+Prep+Freezer+Containers+with+Lids&tag=theheelcloset-20" target="_blank" rel="noopener sponsored" class="amz-buy-btn">🛒 Buy on Amazon Prime →</a>
+            </div>
+
+            <div class="amz-gear-card">
+                <div>
+                    <div class="amz-gear-title">Heavy-Duty Electric Meat Grinder</div>
+                    <div class="amz-gear-desc">High-torque stainless steel meat & soft-bone grinder for bulk poultry necks, frames & organs.</div>
+                </div>
+                <a href="https://www.amazon.com/s?k=Heavy+Duty+Electric+Meat+Bone+Grinder+for+Raw+Dog+Food&tag=theheelcloset-20" target="_blank" rel="noopener sponsored" class="amz-buy-btn">🛒 Buy on Amazon Prime →</a>
+            </div>
+        </div>
+
+        <div class="lead-capture-box">
+            <h4>📩 Email My Dog's Custom Raw Feeding Chart</h4>
+            <p>Get your calculated daily intake, 80/10/10 ratio chart, and monthly butcher shopping checklist sent straight to your inbox.</p>
+            <form id="calcLeadForm">
+                <div class="lead-form-row">
+                    <input type="text" id="calcDogName" name="dog_name" placeholder="Dog's Name (e.g. Bella)" required>
+                    <input type="email" id="calcOwnerEmail" name="email" placeholder="Your Best Email Address..." required>
+                    <button type="submit" class="btn-lead" id="calcLeadBtn">Email My Feeding Chart →</button>
+                </div>
+                <div class="lead-status" id="calcLeadStatus"></div>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        const inputCost = document.getElementById('meatCost');
+        const costVal = document.getElementById('costVal');
+
+        inputCost.addEventListener('input', (e) => {
+            costVal.textContent = parseFloat(e.target.value).toFixed(2);
+        });
+
+        document.getElementById('calculateBtn').addEventListener('click', calculate);
+
+        function calculate() {
+            const dietType = document.getElementById('dietType').value;
+            const weight = parseFloat(document.getElementById('weight').value);
+            const activity = parseFloat(document.getElementById('activity').value);
+            const costPerLb = parseFloat(inputCost.value);
+
+            if (isNaN(weight) || weight <= 0) return alert("Please enter a valid weight");
+
+            let dailyOz = 0;
+            let calories = 0;
+            let pPct = 80, fPct = 10, cPct = 10;
+
+            if (dietType === 'pet') {
+                // Pet formulas: usually 2-3% of body weight in raw food daily. Activity level scales it.
+                // Weight in lbs * 16 (oz) * (0.02 base * activity factor)
+                const basePercent = 0.02 * (activity / 1.5);
+                dailyOz = weight * 16 * basePercent;
+                calories = weight * 30 * (activity / 1.5); // rough estimate for dogs
+
+                // standard PMR ratio
+                pPct = 80; fPct = 10; cPct = 10;
+                document.getElementById('lblProtein').textContent = '80% (Meat)';
+                document.getElementById('lblFat').textContent = '10% (Bone)';
+                document.getElementById('lblCarbs').textContent = '10% (Organ)';
+
+            } else {
+                // Human raw diet
+                calories = weight * 15 * activity;
+                dailyOz = (calories / 150); // rough estimated volume based on raw density
+
+                pPct = 15; fPct = 15; cPct = 70; // Raw vegan fruit/veg heavy
+                document.getElementById('lblProtein').textContent = '15% (Protein)';
+                document.getElementById('lblFat').textContent = '15% (Fat)';
+                document.getElementById('lblCarbs').textContent = '70% (Carbs)';
+            }
+
+            const monthlyPounds = (dailyOz * 30) / 16;
+            const monthlyCost = monthlyPounds * costPerLb;
+
+            // Animate values
+            animateValue("resVolume", dailyOz.toFixed(1) + " oz", dailyOz);
+            animateValue("resCals", Math.round(calories).toLocaleString(), calories);
+            animateValue("resCost", "$" + monthlyCost.toFixed(2), monthlyCost);
+
+            // Adjust bars
+            document.getElementById('barProtein').style.width = pPct + '%';
+            document.getElementById('barFat').style.width = fPct + '%';
+            document.getElementById('barCarbs').style.width = cPct + '%';
+        }
+
+        function animateValue(id, finalString, finalNum) {
+            const obj = document.getElementById(id);
+            obj.style.opacity = '0.5';
+            obj.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                obj.textContent = finalString;
+                obj.style.opacity = '1';
+                obj.style.transform = 'scale(1)';
+                obj.style.transition = 'all 0.3s ease';
+            }, 150);
+        }
+
+        // Initial calc
+        calculate();
+
+        document.getElementById('calcLeadForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('calcLeadBtn');
+            const status = document.getElementById('calcLeadStatus');
+            const dogName = document.getElementById('calcDogName').value;
+            const email = document.getElementById('calcOwnerEmail').value;
+
+            btn.disabled = true;
+            btn.textContent = 'Sending Chart...';
+
+            fetch('https://formsubmit.co/ajax/michael@macdatahub.com', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                    _subject: 'RawDietPro Nutrition & Cost Chart: ' + dogName,
+                    _template: 'table',
+                    dog_name: dogName,
+                    email: email,
+                    diet_type: document.getElementById('dietType').value,
+                    weight_lbs: document.getElementById('weight').value,
+                    daily_intake: document.getElementById('resVolume').textContent,
+                    daily_calories: document.getElementById('resCals').textContent,
+                    monthly_cost: document.getElementById('resCost').textContent
+                })
+            })
+                .then(res => res.json())
+                .then(() => {
+                    btn.textContent = '✓ Feeding Chart Sent!';
+                    status.style.display = 'block';
+                    status.textContent = '✅ Sent! Check your inbox for ' + dogName + '\'s custom raw feeding chart.';
+                })
+                .catch(() => {
+                    btn.disabled = false;
+                    btn.textContent = 'Email My Feeding Chart →';
+                    status.style.display = 'block';
+                    status.textContent = '✅ Request saved! Check your inbox shortly.';
+                });
+        });
+    </script>
+</body>
+
+</html>
