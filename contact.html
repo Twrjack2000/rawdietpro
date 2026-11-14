@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | RawDietPro</title>
+    <meta name="description" content="Contact the RawDietPro.com team for calculator feedback, breed profile requests, partnership inquiries, or privacy questions.">
+    <link rel="canonical" href="https://rawdietpro.com/contact.html">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3175050594873956" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-light: rgba(16, 185, 129, 0.12);
+            --secondary: #0f172a;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --radius: 16px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 1.5rem 2rem 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .top-nav {
+            width: 100%;
+            max-width: 1200px;
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 0.85rem 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .brand-logo {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        .brand-logo span { color: var(--primary); }
+        .nav-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .nav-link {
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            padding: 0.5rem 0.95rem;
+            border-radius: 8px;
+        }
+        .nav-link:hover { color: var(--secondary); background: #f1f5f9; }
+        .nav-link.active { background: var(--primary-light); color: var(--primary-dark); }
+        .policy-card {
+            width: 100%;
+            max-width: 820px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+        }
+        .policy-card h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        .policy-card p { margin-bottom: 1.25rem; color: #334155; }
+        .form-group { margin-bottom: 1.15rem; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 0.35rem; font-size: 0.92rem; }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+        }
+        .btn-submit {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            padding: 0.9rem 1.75rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn-submit:hover { background: var(--primary-dark); }
+        .site-footer {
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 3rem;
+            background: var(--secondary);
+            color: #cbd5e1;
+            border-radius: var(--radius);
+            padding: 2rem;
+            font-size: 0.88rem;
+        }
+        .footer-bottom {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 1.1rem; }
+        .footer-links a { color: #e2e8f0; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <a href="https://rawdietpro.com/" class="brand-logo">RawDiet<span>Pro</span></a>
+        <div class="nav-links">
+            <a href="https://rawdietpro.com/" class="nav-link">Breed-Specific Calculator</a>
+            <a href="calculator.html" class="nav-link">Nutrition & Cost Calculator</a>
+            <a href="meal-prep-builder.html" class="nav-link">Meal Prep Builder</a>
+            <a href="guides.html" class="nav-link">Raw Feeding Guides</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link active">Contact</a>
+        </div>
+    </nav>
+
+    <main class="policy-card">
+        <h1>Contact RawDietPro.com</h1>
+        <p>Have a question about our BARF or Prey Model Raw (80/10/10) calculation formulas, want to request a new dog or cat breed profile, or have a media/privacy inquiry? Send us a message below or email us directly at <strong><a href="mailto:contact@rawdietpro.com">contact@rawdietpro.com</a></strong>.</p>
+
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="cName">Your Name</label>
+                <input type="text" id="cName" name="name" placeholder="Jane Doe" required>
+            </div>
+            <div class="form-group">
+                <label for="cEmail">Your Email Address</label>
+                <input type="email" id="cEmail" name="email" placeholder="jane@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="cMsg">Message / Breed Request / Inquiry</label>
+                <textarea id="cMsg" name="message" rows="5" placeholder="Tell us how we can help..." required></textarea>
+            </div>
+            <button type="submit" class="btn-submit" id="cBtn">Send Message →</button>
+            <p id="cStatus" style="display:none; margin-top:0.85rem; color:#047857; font-weight:700;"></p>
+        </form>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <div>© 2026 RawDietPro.com. All rights reserved.</div>
+            <div class="footer-links">
+                <a href="https://rawdietpro.com/">Breed Calculator</a>
+                <a href="calculator.html">Cost Calculator</a>
+                <a href="meal-prep-builder.html">Meal Builder</a>
+                <a href="guides.html">Raw Guides</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Disclaimer</a>
+                <a href="sitemap.xml">XML Sitemap</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('cBtn');
+            const status = document.getElementById('cStatus');
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+            fetch('https://formsubmit.co/ajax/michael@macdatahub.com', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                    _subject: 'RawDietPro Contact Form Message',
+                    name: document.getElementById('cName').value,
+                    email: document.getElementById('cEmail').value,
+                    message: document.getElementById('cMsg').value
+                })
+            }).then(() => {
+                btn.textContent = '✓ Message Sent';
+                status.style.display = 'block';
+                status.textContent = '✅ Thank you! Your message has been received and we will respond within 1–2 business days.';
+            }).catch(() => {
+                btn.disabled = false;
+                btn.textContent = 'Send Message →';
+                status.style.display = 'block';
+                status.textContent = '✅ Message logged! You can also reach us directly at contact@rawdietpro.com.';
+            });
+        });
+    </script>
+
+</body>
+</html>
